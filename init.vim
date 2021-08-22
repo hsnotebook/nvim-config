@@ -288,6 +288,7 @@ Plug 'hotoo/pangu.vim'
 "}}}
 
 Plug 'neovim/nvim-lspconfig'
+set completeopt-=preview
 
 call plug#end()
 
