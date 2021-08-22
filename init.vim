@@ -6,6 +6,44 @@ endif
 
 call plug#begin(nvim_home . '/plugged')
 
+Plug 'vim-scripts/fcitx.vim'
+Plug 'romainl/vim-cool'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'mg979/vim-visual-multi'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/goyo.vim'
+Plug 'Asheq/close-buffers.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-obsession'
+Plug 'SirVer/ultisnips'
+Plug 'gcmt/taboo.vim'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'sheerun/vim-wombat-scheme'
+Plug 'morhetz/gruvbox'
+Plug 'vimwiki/vimwiki'
+Plug 'masukomi/vim-markdown-folding'
+Plug 'hotoo/pangu.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-scripts/DrawIt'
+Plug 'posva/vim-vue'
+Plug 'othree/html5.vim'
+Plug 'mattn/emmet-vim' , { 'for': ['xml', 'html', 'jsp', 'js', 'vue'] }
+Plug 'pangloss/vim-javascript'
+Plug 'vim-test/vim-test'
+Plug 'puremourning/vimspector'
+Plug 'jpalardy/vim-slime'
+Plug 'neovim/nvim-lspconfig'
+Plug 'mfussenegger/nvim-jdtls'
+
+call plug#end()
+
 "" Misc {{{
 let mapleader=" "
 let maplocalleader=" "
@@ -297,3 +335,24 @@ for _, lsp in ipairs(servers) do
   }
 end
 EOF
+
+augroup java-lsp
+	au FileType java lua require('jdtls').start_or_attach({cmd = {'/home/hs/.config/nvim/java-lsp.sh', '/home/hs/.config/jdtls/workspace/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')}})
+	au FileType java nnoremap <leader>ca <Cmd>lua require('jdtls').code_action()<CR>
+	au FileType java nnoremap <leader>r <Cmd>lua require('jdtls').code_action(false, 'refactor')<CR>
+	au FileType java nnoremap <leader>o <Cmd>lua require'jdtls'.organize_imports()<CR>
+
+	au FileType java nnoremap gD <cmd>lua vim.lsp.buf.declaration()<CR>
+	au FileType java nnoremap gd <cmd>lua vim.lsp.buf.definition()<CR>
+	au FileType java nnoremap K <cmd>lua vim.lsp.buf.hover()<CR>
+	au FileType java nnoremap gi <cmd>lua vim.lsp.buf.implementation()<CR>
+	au FileType java nnoremap <leader>D <cmd>lua vim.lsp.buf.type_definition()<CR>
+	au FileType java nnoremap <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
+	au FileType java nnoremap gr <cmd>lua vim.lsp.buf.references()<CR>
+	au FileType java nnoremap <leader>e <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+	au FileType java nnoremap [d <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+	au FileType java nnoremap ]d <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+	au FileType java nnoremap <leader>f <cmd>lua vim.lsp.buf.formatting()<CR>
+
+	au FileType java set omnifunc=v:lua.vim.lsp.omnifunc
+augroup end
