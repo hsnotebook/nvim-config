@@ -1,0 +1,8 @@
+{
+  "java.jdt.ls.vmargs": "-javaagent:/usr/local/share/lombok/lombok.jar",
+	"java.home": "/usr/lib/jvm/java-11-openjdk",
+	"yaml.schemas": {
+		"kubernetes": ["/k8s-*", "/deploy/*"]
+	},
+	"python.pythonPath": "/home/hs/study/ml/ml-env/bin/python"
+}
