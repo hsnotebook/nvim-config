@@ -295,6 +295,11 @@ call plug#end()
 lua << EOF
 local nvim_lsp = require('lspconfig')
 require'lspconfig'.pyright.setup{}
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+        virtual_text = false
+    }
+)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
