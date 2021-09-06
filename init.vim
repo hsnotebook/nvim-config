@@ -131,6 +131,7 @@ augroup END
 set autowrite
 set autoread
 set clipboard+=unnamedplus
+set scrolloff=6
 
 nnoremap gV `[v`]
 
