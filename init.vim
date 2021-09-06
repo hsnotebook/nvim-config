@@ -48,6 +48,8 @@ call plug#end()
 let mapleader=" "
 let maplocalleader=" "
 
+let g:python3_host_prog  = '/usr/bin/python'
+
 filetype plugin indent on
 
 set directory=/tmp
