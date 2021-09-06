@@ -11,7 +11,6 @@ Plug 'romainl/vim-cool'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-
 Plug 'mg979/vim-visual-multi'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/goyo.vim'
@@ -27,6 +26,7 @@ Plug 'gcmt/taboo.vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'sheerun/vim-wombat-scheme'
+Plug 'morhetz/gruvbox'
 Plug 'vimwiki/vimwiki'
 Plug 'masukomi/vim-markdown-folding'
 Plug 'hotoo/pangu.vim'
@@ -99,7 +99,7 @@ tnoremap <leader>tb <C-\><C-N>:vsplit term://zsh<cr>
 " }}}
 
 "" GUI {{{
-colorscheme wombat
+colorscheme gruvbox
 
 set laststatus=2
 set statusline=%f%m%r%w\ %{fugitive#statusline()}\ [POS+%04l,%04v]\ [%p%%]\ [LEN=%L]\ [%{&ff}]
