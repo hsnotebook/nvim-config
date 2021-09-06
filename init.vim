@@ -10,6 +10,8 @@ call plug#begin(nvim_home . '/plugged')
 let mapleader=" "
 let maplocalleader=" "
 
+let g:python3_host_prog  = '/usr/bin/python'
+
 filetype plugin indent on
 
 set directory=/tmp
