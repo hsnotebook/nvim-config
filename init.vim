@@ -100,7 +100,7 @@ tnoremap <leader>tb <C-\><C-N>:vsplit term://zsh<cr>
 " }}}
 
 "" GUI {{{
-colorscheme wombat
+colorscheme gruvbox
 
 set laststatus=2
 set statusline=%f%m%r%w\ %{fugitive#statusline()}\ [POS+%04l,%04v]\ [%p%%]\ [LEN=%L]\ [%{&ff}]
