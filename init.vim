@@ -6,6 +6,43 @@ endif
 
 call plug#begin(nvim_home . '/plugged')
 
+Plug 'vim-scripts/fcitx.vim'
+Plug 'romainl/vim-cool'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+
+Plug 'mg979/vim-visual-multi'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/goyo.vim'
+Plug 'Asheq/close-buffers.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-obsession'
+Plug 'SirVer/ultisnips'
+Plug 'gcmt/taboo.vim'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'sheerun/vim-wombat-scheme'
+Plug 'vimwiki/vimwiki'
+Plug 'masukomi/vim-markdown-folding'
+Plug 'hotoo/pangu.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-scripts/DrawIt'
+Plug 'posva/vim-vue'
+Plug 'othree/html5.vim'
+Plug 'mattn/emmet-vim' , { 'for': ['xml', 'html', 'jsp', 'js', 'vue'] }
+Plug 'pangloss/vim-javascript'
+Plug 'vim-test/vim-test'
+Plug 'puremourning/vimspector'
+Plug 'jpalardy/vim-slime'
+Plug 'neovim/nvim-lspconfig'
+
+call plug#end()
+
 "" Misc {{{
 let mapleader=" "
 let maplocalleader=" "
@@ -33,10 +70,6 @@ set mat=2
 
 set showcmd
 set splitright
-
-Plug 'vim-scripts/DrawIt'
-
-Plug 'christoomey/vim-tmux-navigator'
 "}}}
 
 "" Windows and tabs {{{
@@ -46,7 +79,6 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap tn :tabn<cr>
 nnoremap tp :tabp<cr>
-Plug 'gcmt/taboo.vim'
 "}}}
 
 "" Terminal {{{
@@ -67,7 +99,6 @@ tnoremap <leader>tb <C-\><C-N>:vsplit term://zsh<cr>
 " }}}
 
 "" GUI {{{
-Plug 'sheerun/vim-wombat-scheme'
 colorscheme wombat
 
 set laststatus=2
@@ -110,39 +141,24 @@ augroup Binary
   au BufWritePost *.bin set nomod | endif
 augroup END
 
-Plug 'ntpeters/vim-better-whitespace'
 let g:better_whitespace_enabled=0
 let g:strip_whitespace_on_save=1
 let g:strip_whitespace_confirm=0
 
 packadd! matchit
 
-Plug 'SirVer/ultisnips'
 let g:UltiSnipsEditSplit="vertical"
 
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-obsession'
-Plug 'junegunn/goyo.vim'
 let g:goyo_width = 120
 
-Plug 'mg979/vim-visual-multi'
-
-Plug 'Asheq/close-buffers.vim'
-
-Plug 'easymotion/vim-easymotion'
 let g:EasyMotion_do_mapping = 0
 nmap s <Plug>(easymotion-overwin-f2)
 let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
-Plug 'vim-scripts/fcitx.vim'
 set ttimeoutlen=100
 
-Plug 'jiangmiao/auto-pairs'
 set sessionoptions+=globals
 
 set undodir=~/tmp/vim/undo
@@ -155,10 +171,6 @@ set hlsearch
 set ignorecase
 set nowrapscan
 hi Search cterm=NONE ctermfg=black ctermbg=gray
-
-" disables search highlighting when you are done searching
-" and re-enables it when you search again.
-Plug 'romainl/vim-cool'
 
 " search hilight text in visual mode
 vnoremap <silent> * :<C-U>
@@ -176,13 +188,10 @@ vnoremap <silent> # :<C-U>
 " }}}
 
 "" Project Manager {{{
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 nnoremap <leader>fe :NERDTreeToggle<cr>
 nnoremap <leader>ff :NERDTreeFind<cr>
 
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/target/*,*/node_modules/*
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 let g:fzf_layout = { 'down': '40%' }
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 let g:fzf_commits_log_options = "--graph --color=always --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %Cblue<%an>%Creset' --date=format:'%F %T' --abbrev-commit --all"
@@ -191,24 +200,13 @@ nnoremap <silent> <leader>P :GFiles<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>h :History<CR>
 
-Plug 'tpope/vim-fugitive'
 nnoremap <leader>gs :Git<cr>
 "}}}
 
 "" Develop {{{
-
-"" Front {{{
-Plug 'posva/vim-vue'
-Plug 'othree/html5.vim'
-Plug 'mattn/emmet-vim' , { 'for': ['xml', 'html', 'jsp', 'js', 'vue'] }
-Plug 'pangloss/vim-javascript'
-"}}}
-
-Plug 'jpalardy/vim-slime'
 let g:slim_python_ipython = 1
 let g:slime_target = "tmux"
 
-Plug 'vim-test/vim-test'
 let test#java#runner = 'maventest'
 nmap <silent> t<C-n> :TestNearest<CR>
 nmap <silent> t<C-f> :TestFile<CR>
@@ -216,7 +214,6 @@ nmap <silent> t<C-s> :TestSuite<CR>
 nmap <silent> t<C-l> :TestLast<CR>
 nmap <silent> t<C-g> :TestVisit<CR>
 
-Plug 'puremourning/vimspector'
 augroup vimspector-debug
 	au!
 	au FileType java nnoremap <buffer> <F1> :CocCommand java.debug.vimspector.start<cr>
@@ -230,7 +227,6 @@ augroup END
 "}}}
 
 "" Document {{{
-Plug 'vimwiki/vimwiki'
 let ctfo = { 'name': 'ctfo', 'path': '~/vimwiki/ctfo', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
 let IT = { 'name': 'IT', 'path': '~/vimwiki/IT', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
 let personal = { 'name': 'personal', 'path': '~/vimwiki/personal', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
@@ -248,14 +244,9 @@ function! VimwikiStoreLink()
 endfunction
 command! StoreLink :call VimwikiStoreLink()
 
-Plug 'masukomi/vim-markdown-folding'
-Plug 'hotoo/pangu.vim'
 "}}}
 
-Plug 'neovim/nvim-lspconfig'
 set completeopt-=preview
-
-call plug#end()
 
 lua << EOF
 local nvim_lsp = require('lspconfig')
