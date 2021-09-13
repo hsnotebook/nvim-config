@@ -61,7 +61,7 @@ nnoremap <leader>m :on<cr>
 nnoremap <leader>ev :sp $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
-""" Macro
+" Macro
 nnoremap Q @@
 set lazyredraw
 
@@ -141,24 +141,30 @@ augroup Binary
   au BufWritePost *.bin set nomod | endif
 augroup END
 
+" ntpeters/vim-better-whitespace
 let g:better_whitespace_enabled=0
 let g:strip_whitespace_on_save=1
 let g:strip_whitespace_confirm=0
 
 packadd! matchit
 
+" SirVer/ultisnips
 let g:UltiSnipsEditSplit="vertical"
 
+" junegunn/goyo.vim
 let g:goyo_width = 120
 
+" easymotion/vim-easymotion
 let g:EasyMotion_do_mapping = 0
 nmap s <Plug>(easymotion-overwin-f2)
 let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
+" vim-scripts/fcitx.vim
 set ttimeoutlen=100
 
+" tpope/vim-obsession
 set sessionoptions+=globals
 
 set undodir=~/tmp/vim/undo
@@ -188,9 +194,11 @@ vnoremap <silent> # :<C-U>
 " }}}
 
 "" Project Manager {{{
+" scrooloose/nerdtree
 nnoremap <leader>fe :NERDTreeToggle<cr>
 nnoremap <leader>ff :NERDTreeFind<cr>
 
+" junegunn/fzf.vim
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/target/*,*/node_modules/*
 let g:fzf_layout = { 'down': '40%' }
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
@@ -200,13 +208,16 @@ nnoremap <silent> <leader>P :GFiles<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>h :History<CR>
 
+" tpope/vim-fugitive
 nnoremap <leader>gs :Git<cr>
 "}}}
 
 "" Develop {{{
+" jpalardy/vim-slime
 let g:slim_python_ipython = 1
 let g:slime_target = "tmux"
 
+" vim-test/vim-test
 let test#java#runner = 'maventest'
 nmap <silent> t<C-n> :TestNearest<CR>
 nmap <silent> t<C-f> :TestFile<CR>
@@ -214,6 +225,7 @@ nmap <silent> t<C-s> :TestSuite<CR>
 nmap <silent> t<C-l> :TestLast<CR>
 nmap <silent> t<C-g> :TestVisit<CR>
 
+" puremourning/vimspector
 augroup vimspector-debug
 	au!
 	au FileType java nnoremap <buffer> <F1> :CocCommand java.debug.vimspector.start<cr>
@@ -227,6 +239,7 @@ augroup END
 "}}}
 
 "" Document {{{
+" vimwiki/vimwiki
 let ctfo = { 'name': 'ctfo', 'path': '~/vimwiki/ctfo', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
 let IT = { 'name': 'IT', 'path': '~/vimwiki/IT', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
 let personal = { 'name': 'personal', 'path': '~/vimwiki/personal', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
