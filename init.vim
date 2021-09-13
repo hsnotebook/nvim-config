@@ -40,6 +40,7 @@ Plug 'vim-test/vim-test'
 Plug 'puremourning/vimspector'
 Plug 'jpalardy/vim-slime'
 Plug 'neovim/nvim-lspconfig'
+Plug 'mfussenegger/nvim-jdtls'
 
 call plug#end()
 
