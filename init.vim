@@ -75,23 +75,6 @@ nnoremap tn :tabn<cr>
 nnoremap tp :tabp<cr>
 "}}}
 
-"" Terminal {{{
-tnoremap <C-h> <C-\><C-N><C-w>h
-tnoremap <C-j> <C-\><C-N><C-w>j
-tnoremap <C-k> <C-\><C-N><C-w>k
-tnoremap <C-l> <C-\><C-N><C-w>l
-if has("nvim")
-  au TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
-  au FileType fzf tunmap <buffer> <Esc>
-endif
-augroup term_statusline
-	au!
-	autocmd TermOpen * setlocal statusline=%{b:term_title}
-augroup END
-nnoremap <leader>tb :vsplit term://zsh<cr>
-tnoremap <leader>tb <C-\><C-N>:vsplit term://zsh<cr>
-" }}}
-
 "" GUI {{{
 colorscheme gruvbox
 
