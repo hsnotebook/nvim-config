@@ -42,43 +42,53 @@ Plug 'mfussenegger/nvim-jdtls'
 call plug#end()
 
 "" Misc {{{
-let mapleader=" "
-let maplocalleader=" "
+lua << EOF
+vim.g.mapleader = ' '
+vim.g.localleader = ' '
+
+vim.opt.directory = '/tmp'
+
+vim.api.nvim_set_keymap('n', '<Leader>w', ':w<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>q', ':q<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>wq', ':wq<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>m', ':on<CR>', { noremap = true })
+
+vim.api.nvim_set_keymap('n', '<Leader>ev', ':sp $MYVIMRC<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>sv', ':source $MYVIMRC<CR>', { noremap = true })
+
+EOF
 
 let g:python3_host_prog  = '/usr/bin/python'
 
-filetype plugin indent on
-
-set directory=/tmp
-
-nnoremap <leader>q :q<cr>
-nnoremap <leader>w :w<cr>
-nnoremap <leader>wq :wq<cr>
-nnoremap <leader>m :on<cr>
-
-nnoremap <leader>ev :sp $MYVIMRC<CR>
-nnoremap <leader>sv :source $MYVIMRC<CR>
-
 " Macro
-nnoremap Q @@
-set lazyredraw
 
-set showmatch
-set mat=2
+lua << EOF
+vim.api.nvim_set_keymap('n', 'Q', '@@', { noremap = true })
+vim.opt.lazyredraw = true
 
-set showcmd
-set splitright
+vim.opt.showcmd = true
+vim.opt.splitright = true
+EOF
+
 "}}}
 
 "" Windows and tabs {{{
-nnoremap tn :tabn<cr>
-nnoremap tp :tabp<cr>
+
+lua << EOF
+vim.api.nvim_set_keymap('n', 'tn', ':tabn<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', 'tp', ':tabp<CR>', { noremap = true })
+EOF
+
 "}}}
 
 "" GUI {{{
-colorscheme gruvbox
+lua << EOF
+vim.cmd('colorscheme gruvbox')
 
-set laststatus=2
+vim.opt.laststatus = 2
+-- vim.opt.statusline = '%f%m%r%w\ %{fugitive#statusline()}\ [POS+%04l,%04v]\ [%p%%]\ [LEN=%L]\ [%{&ff}]'
+EOF
+
 set statusline=%f%m%r%w\ %{fugitive#statusline()}\ [POS+%04l,%04v]\ [%p%%]\ [LEN=%L]\ [%{&ff}]
 " }}}
 
