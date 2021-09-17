@@ -289,7 +289,7 @@ end
 EOF
 
 augroup java-lsp
-	au FileType java lua require('jdtls').start_or_attach({cmd = {'/home/hs/.config/nvim/java-lsp.sh', '/home/hs/.config/jdtls/workspace/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')}})
+	au FileType java lua require('jdtls').start_or_attach({cmd = {'/home/hs/.config/nvim/java/java-lsp.sh', '/home/hs/.config/jdtls/workspace/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')}})
 	au FileType java nnoremap <leader>ca <Cmd>lua require('jdtls').code_action()<CR>
 	au FileType java nnoremap <leader>r <Cmd>lua require('jdtls').code_action(false, 'refactor')<CR>
 	au FileType java nnoremap <leader>o <Cmd>lua require'jdtls'.organize_imports()<CR>
