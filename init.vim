@@ -6,7 +6,7 @@ endif
 
 call plug#begin(nvim_home . '/plugged')
 
-Plug 'vim-scripts/fcitx.vim'
+Plug 'lilydjwg/fcitx.vim'
 Plug 'romainl/vim-cool'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
