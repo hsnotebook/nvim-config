@@ -12,7 +12,7 @@ GRADLE_HOME=$HOME/gradle /usr/lib/jvm/java-11-openjdk/bin/java \
   -Dlog.level=ALL \
   -Xms1g \
   -Xmx2G \
-  -javaagent:~/.config/nvim/java/lombok.jar \
+  -javaagent:/home/hs/.config/nvim/java/lombok.jar \
   -jar $(echo "$JAR") \
   -configuration "$JDTLS_SERVER/config_linux" \
   -data "${1:-$JDTLS_HOME/workspace}" \
