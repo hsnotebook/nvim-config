@@ -36,6 +36,7 @@ Plug 'othree/html5.vim'
 Plug 'mattn/emmet-vim' , { 'for': ['xml', 'html', 'jsp', 'js', 'vue'] }
 Plug 'pangloss/vim-javascript'
 Plug 'vim-test/vim-test'
+Plug 'preservim/vimux'
 Plug 'jpalardy/vim-slime'
 Plug 'neovim/nvim-lspconfig'
 Plug 'mfussenegger/nvim-jdtls'
@@ -197,6 +198,7 @@ let g:slime_target = "tmux"
 
 " vim-test/vim-test
 let test#java#runner = 'maventest'
+let test#strategy = "vimux"
 nmap <silent> t<C-n> :TestNearest<CR>
 nmap <silent> t<C-f> :TestFile<CR>
 nmap <silent> t<C-s> :TestSuite<CR>
