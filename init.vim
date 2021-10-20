@@ -9,8 +9,6 @@ call plug#begin(nvim_home . '/plugged')
 Plug 'lilydjwg/fcitx.vim'
 Plug 'lambdalisue/suda.vim'
 Plug 'romainl/vim-cool'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'mg979/vim-visual-multi'
 Plug 'jiangmiao/auto-pairs'
@@ -44,6 +42,11 @@ Plug 'mfussenegger/nvim-dap'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 call plug#end()
 
@@ -181,16 +184,6 @@ vnoremap <silent> # :<C-U>
 nnoremap <leader>fe :NERDTreeToggle<cr>
 nnoremap <leader>ff :NERDTreeFind<cr>
 
-" junegunn/fzf.vim
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/target/*,*/node_modules/*
-let g:fzf_layout = { 'down': '40%' }
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
-let g:fzf_commits_log_options = "--graph --color=always --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %Cblue<%an>%Creset' --date=format:'%F %T' --abbrev-commit --all"
-nnoremap <silent> <leader>p :Files<CR>
-nnoremap <silent> <leader>P :GFiles<CR>
-nnoremap <silent> <leader>b :Buffers<CR>
-nnoremap <silent> <leader>h :History<CR>
-
 " tpope/vim-fugitive
 nnoremap <leader>gs :Git<cr>
 "}}}
@@ -238,6 +231,7 @@ lua << EOF
 require('hs-lspconfig').setup()
 require('hs-complete').setup()
 require('hs-dap').setup()
+require('hs-telescope').setup()
 EOF
 
 augroup java-lsp
