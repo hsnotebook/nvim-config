@@ -34,25 +34,30 @@ local on_attach = function(client, bufnr)
 
 end
 
-local function setup_servers()
+local function setup_python()
 	local nvim_lsp = require('lspconfig')
-	-- Use a loop to conveniently call 'setup' on multiple servers and
-	-- map buffer local keybindings when the language server attaches
-	local servers = { 'pyright' }
-	for _, lsp in ipairs(servers) do
-	  nvim_lsp[lsp].setup {
+	nvim_lsp['pyright'].setup {
 		on_attach = on_attach,
 		capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
 		flags = {
-		  debounce_text_changes = 150,
+			debounce_text_changes = 150,
+		},
+		settings = {
+			python = {
+				analysis = {
+					typeCheckingMode = "off",
+					autoSearchPaths = true,
+					useLibraryCodeForTypes = true,
+					diagnosticMode = 'workspace'
+				}
+			}
 		}
-	  }
-	end
+	}
 end
 
 function M.setup()
 	disable_diagnostic_msg()
-	setup_servers()
+	setup_python()
 end
 
 return M
