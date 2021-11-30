@@ -232,6 +232,7 @@ require('hs-lspconfig').setup()
 require('hs-complete').setup()
 require('hs-dap').setup()
 require('hs-telescope').setup()
+require('hs-misc').setup()
 EOF
 
 augroup java-lsp
