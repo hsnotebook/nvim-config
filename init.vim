@@ -206,9 +206,9 @@ nmap <silent> t<C-g> :TestVisit<CR>
 
 "" Document {{{
 " vimwiki/vimwiki
-let ctfo = { 'name': 'ctfo', 'path': '~/vimwiki/ctfo', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
-let IT = { 'name': 'IT', 'path': '~/vimwiki/IT', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
-let personal = { 'name': 'personal', 'path': '~/vimwiki/personal', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
+let ctfo = { 'name': 'ctfo', 'path': '~/wiki/ctfo', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
+let IT = { 'name': 'IT', 'path': '~/wiki/IT', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
+let personal = { 'name': 'personal', 'path': '~/wiki/personal', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
 let g:vimwiki_list = [ctfo, IT, personal]
 let g:vimwiki_html_header_numbering = 1
 augroup vimwiki
