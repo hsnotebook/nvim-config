@@ -68,6 +68,8 @@ nnoremap <leader>m :on<cr>
 nnoremap <leader>ev :sp $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
+set autowriteall
+
 " Macro
 nnoremap Q @@
 set lazyredraw
