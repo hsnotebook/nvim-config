@@ -1,3 +1,4 @@
+vim.cmd([[
 if (has("win32"))
 	let nvim_home='c:/Users/Administrator/AppData/Local/nvim'
 else
@@ -14,7 +15,7 @@ Plug 'mg979/vim-visual-multi'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/goyo.vim'
 Plug 'Asheq/close-buffers.vim'
-Plug 'easymotion/vim-easymotion'
+Plug 'phaazon/hop.nvim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -49,75 +50,69 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 call plug#end()
+]])
 
-"" Misc {{{
-let mapleader=" "
-let maplocalleader=" "
+vim.g.mapleader = ' '
+vim.g.localleader = ' '
 
-let g:python3_host_prog  = '/usr/bin/python'
+vim.opt.directory = '/tmp'
 
-filetype plugin indent on
+vim.g.python3_host_prog  = '/usr/bin/python'
 
-set directory=/tmp
+vim.api.nvim_set_keymap('n', '<Leader>w', ':w<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>q', ':q<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>wq', ':wq<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>m', ':on<CR>', { noremap = true })
 
-nnoremap <leader>q :q<cr>
-nnoremap <leader>w :w<cr>
-nnoremap <leader>wq :wq<cr>
-nnoremap <leader>m :on<cr>
+vim.api.nvim_set_keymap('n', '<Leader>ev', ':sp $MYVIMRC<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>sv', ':source $MYVIMRC<CR>', { noremap = true })
 
-nnoremap <leader>ev :sp $MYVIMRC<CR>
-nnoremap <leader>sv :source $MYVIMRC<CR>
+vim.api.nvim_set_keymap('n', 'Q', '@@', { noremap = true })
+vim.opt.lazyredraw = true
 
-set autowriteall
+vim.opt.showmatch = true
+vim.opt.mat = 2
 
-" Macro
-nnoremap Q @@
-set lazyredraw
+vim.opt.showcmd = true
+vim.opt.splitright = true
 
-set showmatch
-set mat=2
+-- Windows and tabs
+vim.api.nvim_set_keymap('n', 'tn', ':tabn<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', 'tp', ':tabp<CR>', { noremap = true })
 
-set showcmd
-set splitright
-"}}}
 
-"" Windows and tabs {{{
-nnoremap tn :tabn<cr>
-nnoremap tp :tabp<cr>
-"}}}
+vim.cmd('colorscheme gruvbox')
 
-"" GUI {{{
-colorscheme gruvbox
+vim.opt.laststatus = 2
+-- vim.opt.statusline = '%f%m%r%w\ %{fugitive#statusline()}\ [POS+%04l,%04v]\ [%p%%]\ [LEN=%L]\ [%{&ff}]'
 
-set laststatus=2
+vim.cmd([[
 set statusline=%f%m%r%w\ %{fugitive#statusline()}\ [POS+%04l,%04v]\ [%p%%]\ [LEN=%L]\ [%{&ff}]
-" }}}
+]])
 
-"" Folding {{{
-set nofoldenable
-"}}}
+vim.opt.foldenable = false
 
-"" Tabstop {{{
-set tabstop=4
-set shiftwidth=4
-set noexpandtab
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = false
+vim.cmd([[
 augroup two_tab_indent
 	au!
 	autocmd FileType xml,html setlocal tabstop=2 | setlocal shiftwidth=2
     autocmd FileType scss,vue,javascript,yaml,css,json setlocal expandtab | setlocal tabstop=2 | setlocal shiftwidth=2
 augroup END
-"}}}
+]])
 
-"" Editing {{{
-set autowrite
-set autoread
-set clipboard+=unnamedplus
-set scrolloff=6
+vim.g.autowriteall = true
+vim.g.autoread = true
+vim.opt.clipboard = { 'unnamedplus' }
+vim.opt.scrolloff = 6
 
-nnoremap gV `[v`]
+vim.api.nvim_set_keymap('n', 'gV', '`[v`]', { noremap = true })
 
-inoremap <C-l> <esc>b~ea
+vim.api.nvim_set_keymap('i', '<c-l>', '<esc>b~ea', { noremap = true })
 
+vim.cmd([[
 augroup Binary
   au!
   au BufReadPre  *.bin let &bin=1
@@ -128,45 +123,40 @@ augroup Binary
   au BufWritePost *.bin if &bin | %!xxd
   au BufWritePost *.bin set nomod | endif
 augroup END
+]])
 
-" ntpeters/vim-better-whitespace
-let g:better_whitespace_enabled=0
-let g:strip_whitespace_on_save=1
-let g:strip_whitespace_confirm=0
+-- ntpeters/vim-better-whitespace
+vim.g.better_whitespace_enabled = 0
+vim.g.strip_whitespace_on_save = 1
+vim.g.strip_whitespace_confirm = 0
 
-packadd! matchit
+-- SirVer/ultisnips
+vim.g.UltiSnipsEditSplit = 'vertical'
 
-" SirVer/ultisnips
-let g:UltiSnipsEditSplit="vertical"
+-- junegunn/goyo.vim
+vim.g.goyo_width = 120
 
-" junegunn/goyo.vim
-let g:goyo_width = 120
+require'hop'.setup()
+vim.api.nvim_set_keymap('n', 's', "<cmd>lua require'hop'.hint_char2()<cr>", { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>l', "<cmd>lua require'hop'.hint_lines()<cr>", { noremap = true })
 
-" easymotion/vim-easymotion
-let g:EasyMotion_do_mapping = 0
-nmap s <Plug>(easymotion-overwin-f2)
-let g:EasyMotion_smartcase = 1
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
+-- fcitx.vim
+vim.opt.ttimeoutlen = 100
 
-" vim-scripts/fcitx.vim
-set ttimeoutlen=100
+-- tpope/vim-obsession
+vim.opt.sessionoptions = vim.opt.sessionoptions + 'globals'
 
-" tpope/vim-obsession
-set sessionoptions+=globals
+vim.opt.undodir = '~/tmp/vim/undo'
+vim.opt.undofile = true
 
-set undodir=~/tmp/vim/undo
-set undofile
-"}}}
+vim.opt.incsearch = true
+vim.opt.hlsearch = true
+vim.opt.ignorecase = true
+vim.opt.wrapscan = false
+vim.cmd('hi Search cterm=NONE ctermfg=black ctermbg=gray')
 
-"" Search {{{
-set incsearch
-set hlsearch
-set ignorecase
-set nowrapscan
-hi Search cterm=NONE ctermfg=black ctermbg=gray
-
-" search hilight text in visual mode
+-- search hilight text in visual mode
+vim.cmd([[
 vnoremap <silent> * :<C-U>
     \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
     \gvy/<C-R><C-R>=substitute(
@@ -178,24 +168,21 @@ vnoremap <silent> # :<C-U>
     \gvy?<C-R><C-R>=substitute(
     \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
     \gV:call setreg('"', old_reg, old_regtype)<CR>
+]])
 
-" }}}
+-- scrooloose/nerdtree
+vim.api.nvim_set_keymap('n', '<Leader>fe', ':NERDTreeToggle<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>ff', ':NERDTreeFind<CR>', { noremap = true })
 
-"" Project Manager {{{
-" scrooloose/nerdtree
-nnoremap <leader>fe :NERDTreeToggle<cr>
-nnoremap <leader>ff :NERDTreeFind<cr>
+-- tpope/vim-fugitive
+vim.api.nvim_set_keymap('n', '<Leader>gs', ':Git<CR>', { noremap = true })
 
-" tpope/vim-fugitive
-nnoremap <leader>gs :Git<cr>
-"}}}
+-- jpalardy/vim-slime
+vim.g.slim_python_ipython = 1
+vim.g.slime_target = 'tmux'
 
-"" Develop {{{
-" jpalardy/vim-slime
-let g:slim_python_ipython = 1
-let g:slime_target = "tmux"
-
-" vim-test/vim-test
+-- vim-test/vim-test
+vim.cmd([[
 let test#java#runner = 'maventest'
 let test#strategy = "vimux"
 nmap <silent> t<C-n> :TestNearest<CR>
@@ -203,11 +190,11 @@ nmap <silent> t<C-f> :TestFile<CR>
 nmap <silent> t<C-s> :TestSuite<CR>
 nmap <silent> t<C-l> :TestLast<CR>
 nmap <silent> t<C-g> :TestVisit<CR>
+]])
 
-"}}}
 
-"" Document {{{
-" vimwiki/vimwiki
+-- vimwiki/vimwiki
+vim.cmd([[
 let ctfo = { 'name': 'ctfo', 'path': '~/wiki/ctfo', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
 let IT = { 'name': 'IT', 'path': '~/wiki/IT', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
 let personal = { 'name': 'personal', 'path': '~/wiki/personal', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
@@ -218,25 +205,20 @@ augroup vimwiki
 	au Filetype vimwiki setlocal textwidth=80 | setlocal foldmethod=manual
 	au FileType vimwiki nnoremap <leader>tt :VimwikiToggleListItem<cr>
 augroup END
+]])
 
-" file:xxx::lineNum to unnamed register
-function! VimwikiStoreLink()
-	let @" = 'file:'.expand("%:p").'::'.line('.')
-endfunction
-command! StoreLink :call VimwikiStoreLink()
-
-"}}}
-
+vim.cmd([[
 set completeopt=menu,menuone,noselect
+]])
 
-lua << EOF
 require('hs-lspconfig').setup()
 require('hs-complete').setup()
 require('hs-dap').setup()
 require('hs-telescope').setup()
 require('hs-misc').setup()
-EOF
 
+vim.cmd([[
 augroup java-lsp
 	au FileType java lua require('hs-java').setup()
 augroup end
+]])
