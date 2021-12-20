@@ -9,7 +9,7 @@ local on_attach = function(client, bufnr)
 	buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
 	local opts = { noremap=true, silent=true }
-	buf_set_keymap('n', '<leader>ca', "<Cmd>lua require'jdtls'.code_action()<CR>", opts)
+	buf_set_keymap('n', '<leader>ca', "<Cmd>lua require('telescope.builtin').lsp_code_actions()<CR>", opts)
 	buf_set_keymap('n', '<leader>o', "<Cmd>lua require'jdtls'.organize_imports()<CR>", opts)
 	buf_set_keymap('n', 'gD', "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 	buf_set_keymap('n', 'gd', "<Cmd>lua require('telescope.builtin').lsp_definitions()<CR>", opts)
@@ -29,10 +29,26 @@ local on_attach = function(client, bufnr)
 end
 
 function M.setup()
+	local jdtls_home = '/home/hs/.config/jdtls'
+	local jdtls_server = jdtls_home .. '/server'
+	local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+	local workspace_dir = jdtls_home .. '/workspace/' .. project_name
 	local config = {
 		cmd = {
-			'/home/hs/.config/nvim/java/java-lsp.sh',
-			'/home/hs/.config/jdtls/workspace/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+			'/usr/lib/jvm/java-11-openjdk/bin/java',
+			'-Declipse.application=org.eclipse.jdt.ls.core.id1',
+			'-Dosgi.bundles.defaultStartLevel=4',
+			'-Declipse.product=org.eclipse.jdt.ls.core.product',
+			'-Dlog.protocol=true',
+			'-Dlog.level=ALL',
+			'-Xms1g',
+			'-javaagent:/home/hs/.config/nvim/java/lombok.jar',
+			'--add-modules=ALL-SYSTEM',
+			'--add-opens', 'java.base/java.util=ALL-UNNAMED',
+			'--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+			'-jar', jdtls_server .. '/plugins/org.eclipse.equinox.launcher_1.6.300.v20210813-1054.jar',
+			'-configuration', jdtls_server .. '/config_linux',
+			'-data', workspace_dir
 		},
 		capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
 		init_options = {
