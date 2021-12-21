@@ -135,8 +135,6 @@ end)
 vim.g.mapleader = ' '
 vim.g.localleader = ' '
 
-vim.opt.directory = '/tmp'
-
 vim.g.python3_host_prog  = '/usr/bin/python'
 
 vim.api.nvim_set_keymap('n', '<Leader>w', ':w<CR>', { noremap = true })
@@ -202,7 +200,6 @@ augroup Binary
 augroup END
 ]])
 
-vim.opt.undodir = '~/tmp/vim/undo'
 vim.opt.undofile = true
 
 vim.opt.incsearch = true
