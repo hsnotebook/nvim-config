@@ -62,7 +62,7 @@ require('packer').startup(function(use)
 			let g:vimwiki_html_header_numbering = 1
 			augroup vimwiki
 				au!
-				au Filetype vimwiki setlocal textwidth=80 | setlocal foldmethod=manual
+				au FileType vimwiki setlocal textwidth=80 | setlocal foldmethod=manual
 				au FileType vimwiki nnoremap <leader>tt :VimwikiToggleListItem<cr>
 			augroup END
 			]])
