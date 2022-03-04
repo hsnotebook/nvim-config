@@ -142,7 +142,7 @@ vim.api.nvim_set_keymap('n', '<Leader>q', ':q<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>wq', ':wq<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>m', ':on<CR>', { noremap = true })
 
-vim.api.nvim_set_keymap('n', '<Leader>ev', ':sp $MYVIMRC<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>ev', ':sp $MYVIMRC<CR>:lcd %:h<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<Leader>sv', ':source $MYVIMRC<CR>', { noremap = true })
 
 vim.api.nvim_set_keymap('n', 'Q', '@@', { noremap = true })
