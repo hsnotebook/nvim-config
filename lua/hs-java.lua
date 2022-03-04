@@ -9,7 +9,8 @@ local on_attach = function(client, bufnr)
 	buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
 	local opts = { noremap=true, silent=true }
-	buf_set_keymap('n', '<leader>ca', "<Cmd>lua require('telescope.builtin').lsp_code_actions()<CR>", opts)
+
+	buf_set_keymap('n', '<leader>ca', "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 	buf_set_keymap('n', '<leader>o', "<Cmd>lua require'jdtls'.organize_imports()<CR>", opts)
 	buf_set_keymap('n', 'gD', "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 	buf_set_keymap('n', 'gd', "<Cmd>lua require('telescope.builtin').lsp_definitions()<CR>", opts)
