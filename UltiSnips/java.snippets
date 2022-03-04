@@ -92,6 +92,25 @@ public class `!v expand('%:t:r')` {
 }
 endsnippet
 
+snippet webtest "unit mvc test" b
+package `!p snip.rv = package()`;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.test.web.servlet.MockMvc;
+
+@WebMvcTest
+public class `!v expand('%:t:r')` {
+
+	@Autowired
+	private MockMvc mockMvc;
+
+	${1}
+
+}
+endsnippet
+
+
 snippet jpatest "Jpa test" b
 package `!p snip.rv = package()`;
 
