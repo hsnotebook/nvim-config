@@ -11,7 +11,12 @@ require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'
 	use 'lambdalisue/suda.vim'
 	use 'romainl/vim-cool'
-	use 'jiangmiao/auto-pairs'
+	use {
+		'windwp/nvim-autopairs',
+		config = function ()
+			require'nvim-autopairs'.setup()
+		end
+	}
 	use 'Asheq/close-buffers.vim'
 	use 'tpope/vim-surround'
 	use 'mg979/vim-visual-multi'
