@@ -3,7 +3,7 @@ local api = vim.api
 local M = {}
 
 function M.setup()
-	api.nvim_set_keymap('n', 'K', '<Cmd>lua require("dap.ui.variables").hover()<CR>', { silent = true })
+	api.nvim_set_keymap('n', 'K', '<Cmd>lua require("dap.ui.widgets").hover()<CR>', { silent = true })
 	api.nvim_set_keymap('n', '<F8>', '<Cmd>lua require("dap").continue()<CR>', { silent = true })
 	api.nvim_set_keymap('n', '<F10>', '<Cmd>lua require("dap").step_over()<CR>', { silent = true })
 	api.nvim_set_keymap('n', '<F11>', '<Cmd>lua require("dap").step_into()<CR>', { silent = true })
