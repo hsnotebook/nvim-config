@@ -174,12 +174,11 @@ vim.opt.foldenable = false
 
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
-vim.opt.expandtab = false
+vim.opt.expandtab = true
 vim.cmd([[
 augroup two_tab_indent
 	au!
-	autocmd FileType xml,html setlocal tabstop=2 | setlocal shiftwidth=2
-    autocmd FileType scss,vue,javascript,yaml,css,json setlocal expandtab | setlocal tabstop=2 | setlocal shiftwidth=2
+    autocmd FileType html,scss,vue,javascript,yaml,css,json setlocal tabstop=2 | setlocal shiftwidth=2
 augroup END
 ]])
 
