@@ -1,0 +1,324 @@
+##################################
+# global function
+global !p
+import os
+import string
+def package():
+	filepath = os.path.dirname(path)
+	try:
+		i = 1
+		pathbase = 'src' + os.sep + 'main' + os.sep + 'java' + os.sep + ''
+		index = filepath.index(pathbase)
+		length = len(pathbase)
+	except ValueError as e:
+		i = 3
+		pathbase = 'src' + os.sep + 'test' + os.sep + 'java' + os.sep + ''
+		index = filepath.index(pathbase)
+		length = len(pathbase)
+	package = filepath[index+length:].replace(os.sep, '.')
+	return package
+
+def getClassToBeTested():
+	return snip.basename.replace('Tests', '')
+
+def lowerFirstLetterCase(s):
+	return s[:1].lower() + s[1:]
+endglobal
+
+##################################
+# normal snip
+snippet while
+while (${1:condition}) {
+	${2://code...}
+}
+endsnippet
+
+snippet if
+if (${1:condition}) {
+	${2://code...}
+}
+endsnippet
+
+snippet foreach
+for (${1:Object} ${2:obj} : ${3:objs}) {
+	${4:// code...}
+}
+endsnippet
+
+snippet for
+for (${1:int i = 0}; ${2:i < 100} : ${3:i++}) {
+	${4:// code...}
+}
+endsnippet
+
+snippet syso "System.out.println" b
+System.out.println(${1:thing});
+endsnippet
+
+##################################
+# class
+snippet class "normar class" b
+package `!p snip.rv = package()`;
+
+import lombok.Data;
+
+@Data
+public class `!v expand('%:t:r')` {
+	${0}
+}
+endsnippet
+
+snippet unittest "unit test" b
+package `!p snip.rv = package()`;
+
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
+
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+@ExtendWith(MockitoExtension.class)
+public class `!v expand('%:t:r')` {
+
+	@InjectMocks
+	private `!p snip.rv = getClassToBeTested()` `!p snip.rv = lowerFirstLetterCase(getClassToBeTested())`;
+
+	// code
+
+}
+endsnippet
+
+snippet ittest "integration test" b
+package `!p snip.rv = package()`;
+
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
+
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.web.servlet.MockMvc;
+
+@SpringBootTest
+@AutoConfigureMockMvc
+@ActiveProfiles("test")
+public class `!v expand('%:t:r')` {
+
+	@Autowired
+	private MockMvc mockMvc;
+
+	${1}
+
+}
+endsnippet
+
+snippet webtest "unit mvc test" b
+package `!p snip.rv = package()`;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.test.web.servlet.MockMvc;
+
+@WebMvcTest
+public class `!v expand('%:t:r')` {
+
+	@Autowired
+	private MockMvc mockMvc;
+
+	${1}
+
+}
+endsnippet
+
+
+snippet jpatest "Jpa test" b
+package `!p snip.rv = package()`;
+
+import static org.assertj.core.api.Assertions.*;
+
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+@ExtendWith(SpringExtension.class)
+@DataJpaTest
+public class `!v expand('%:t:r')` {
+
+	@Autowired
+	private TestEntityManager entityManager;
+
+	@Autowired
+	private `!p snip.rv = getClassToBeTested()` `!p snip.rv = lowerFirstLetterCase(getClassToBeTested())`;
+
+	${1}
+
+}
+endsnippet
+
+snippet interface "normar class" b
+package `!p snip.rv = package()`;
+
+public interface `!v expand('%:t:r')` {
+
+	${1:// code}
+
+}
+endsnippet
+
+snippet controller "controller" b
+package `!p snip.rv = package()`;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class `!v expand('%:t:r')` {
+
+	${2:// code}
+
+}
+endsnippet
+
+snippet service "service" b
+package `!p snip.rv = package()`;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class `!v expand('%:t:r')` {
+
+	${2:// code}
+
+}
+endsnippet
+
+snippet entity "entity" b
+package `!p snip.rv = package()`;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import lombok.Data;
+
+@Data
+@Entity
+@Table(name = "${1:name}")
+public class `!v expand('%:t:r')` {
+
+	${2:// code}
+
+}
+endsnippet
+
+snippet repository "jpa repository" b
+package `!p snip.rv = package()`;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface `!p snip.rv = fn.replace(".java","")` extends JpaRepository<`!p snip.rv = fn.replace("Repository.java", "")`, ${1:T}> {
+
+}
+endsnippet
+
+snippet mapper "mybatis mapper" b
+package `!p snip.rv = package()`;
+
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface `!v expand('%:t:r')` {
+
+}
+endsnippet
+
+################################
+# method
+snippet test "inset @Test method" b
+@Test
+public void ${1:testSomething}() {
+	// given
+		${2}
+	// when
+
+	// then
+}
+endsnippet
+
+##########################
+# spring mvc
+snippet au "autowired" b
+@Autowired
+private ${1:Type} ${2:attr};
+endsnippet
+
+snippet co "column" b
+@Column(name = "${1:name}")
+private ${2:Type} ${3:attr};
+endsnippet
+
+snippet rm "requestmapping" b
+@RequestMapping(${1:url})
+endsnippet
+
+snippet rq "request param" w
+@RequestParam
+endsnippet
+
+snippet rb "request body" i
+@RequestBody
+endsnippet
+
+snippet pv "path variable" i
+@PathVariable
+endsnippet
+
+snippet gm "get web method" b
+@GetMapping(${1:"url"})${2}
+public ${3:String} ${4:method}(${5:param}) {
+	${6:// code}
+}
+endsnippet
+
+snippet pm "post web method" b
+@PostMapping(${1:"url"})${2}
+public ${3:String} ${4:method}(${5:param}) {
+	${6:// code}
+}
+endsnippet
+
+#######################
+# log
+snippet lg "logger" b
+private static final Logger logger = LoggerFactory.getLogger(`!v expand('%:t:r')`.class);
+endsnippet
+
+snippet ld "logger.debug()" b
+logger.debug("${1:msg}");
+endsnippet
+
+snippet li "logger.info()" b
+logger.info("${1:msg}");
+endsnippet
+
+snippet lw "logger.warn()" b
+logger.warn("${1:msg}");
+endsnippet
+
+snippet le "logger.error()" b
+logger.error("${1:msg}");
+endsnippet

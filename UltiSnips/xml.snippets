@@ -1,0 +1,100 @@
+global !p
+import os
+import string
+def package():
+	filepath = os.path.dirname(path)
+	try:
+		i = 1
+		pathbase = 'src' + os.sep + 'main' + os.sep + 'java' + os.sep + ''
+		index = filepath.index(pathbase)
+		length = len(pathbase)
+	except ValueError as e:
+		i = 3
+		pathbase = 'src' + os.sep + 'test' + os.sep + 'java' + os.sep + ''
+		index = filepath.index(pathbase)
+		length = len(pathbase)
+	package = filepath[index+length:].replace(os.sep, '.')
+	return package
+
+def resultMapId(mapperName):
+	entityName = mapperName.replace("Mapper", "")
+	return entityName[:1].lower() + entityName[1:] + "ResultMap"
+
+def entityType(mapperName):
+	entityName = mapperName.replace("Mapper", "")
+	packageName = package()
+	packageName = packageName.replace("mapper", "entity")
+	return packageName + "." + entityName
+endglobal
+
+snippet xml
+<?xml version="1.0" encoding="UTF-8"?>
+endsnippet
+
+snippet pom-struct
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>${1:groupId}</groupId>
+	<version>${2:version}</version>
+	<artifactId>${3:artifactId}</artifactId>
+	<packaging>${4:packaging}</packaging>
+	<name>${5:name}</name>
+	<description>${6:description}</description>
+
+</project>
+endsnippet
+
+snippet mapper
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="`!p snip.rv = package()`.`!v expand('%:t:r')`">
+
+	<resultMap id="`!p snip.rv = resultMapId(snip.basename)`" type="`!p snip.rv = entityType(snip.basename)`">
+	</resultMap>
+
+</mapper>
+endsnippet
+
+snippet map
+<resultMap id="`!p snip.rv = resultMapId(snip.basename)`" type="`!p snip.rv = entityType(snip.basename)`">
+</resultMap>
+endsnippet
+
+snippet as "association" b
+<association property="${1}" resultMap="${2}" columnPrefix="${3}"/>
+endsnippet
+
+snippet select
+<select id="${1}" resultMap="${2}">
+</select>
+endsnippet
+
+snippet insert
+<insert id="${1}">
+</insert>
+endsnippet
+
+snippet update
+<update id="${1}">
+</update>
+endsnippet
+
+snippet delete
+<delete id="${1}">
+</delete>
+endsnippet
+
+snippet sql
+<sql id="${1}">
+</sql>
+endsnippet
+
+snippet inc
+<include refid="${1}">
+	<property name="${2}" value="${3}" />
+</include>
+endsnippet
