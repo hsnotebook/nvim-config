@@ -26,7 +26,6 @@ require('packer').startup(function(use)
   }
 
   -- edit
-  use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
   use {
     'ntpeters/vim-better-whitespace',
     config = function ()
@@ -185,6 +184,17 @@ vim.keymap.set('n', 'tp', ':tabp<CR>', { noremap = true })
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+-- Tab
+vim.o.expandtab = true
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.cmd([[
+augroup two_tab_indent
+  au!
+  autocmd FileType lua,html,scss,vue,javascript,yaml,css,json setlocal tabstop=2 | setlocal shiftwidth=2
+augroup END
+]])
 
 -- Statusline
 vim.cmd([[
