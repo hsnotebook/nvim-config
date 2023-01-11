@@ -13,19 +13,6 @@ require('packer').startup(function(use)
 
   -- ui
   use { 'morhetz/gruvbox', config = function () vim.cmd('colorscheme gruvbox') end }
-  use {
-    'nvim-lualine/lualine.nvim',
-    config = function ()
-      require('lualine').setup({
-        options = {
-          icons_enabled = false,
-          theme = 'gruvbox',
-          component_separators = '|',
-          section_separators = '',
-        }
-      })
-    end
-  }
 
   -- navigation
   use 'christoomey/vim-tmux-navigator'
@@ -198,3 +185,8 @@ vim.keymap.set('n', 'tp', ':tabp<CR>', { noremap = true })
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+-- Statusline
+vim.cmd([[
+  set statusline=%f%m%r%w\ %{fugitive#statusline()}\ [POS+%04l,%04v]\ [%p%%]\ [LEN=%L]\ [%{&ff}]
+]])
