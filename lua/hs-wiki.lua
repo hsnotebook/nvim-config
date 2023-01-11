@@ -21,7 +21,8 @@ M.setup = function()
     let ctfo = { 'name': 'ctfo', 'path': '~/wiki/ctfo', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
     let IT = { 'name': 'IT', 'path': '~/wiki/IT', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
     let personal = { 'name': 'personal', 'path': '~/wiki/personal', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
-    let g:vimwiki_list = [ctfo, IT, personal]
+    let finance = { 'name': 'finance', 'path': '~/wiki/finance', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
+    let g:vimwiki_list = [ctfo, IT, personal, finance]
     let g:vimwiki_html_header_numbering = 1
   ]])
   vim.keymap.set('n', '<leader>vf', require('hs-wiki').wiki_files, { desc = 'Search Wiki' })
@@ -36,6 +37,8 @@ end
 vim.cmd([[
   command! Wiki lua require('hs-wiki').openWiki()
 ]])
+
+require('hs-wiki-heading').setup()
 
 return M
 
