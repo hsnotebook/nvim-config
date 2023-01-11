@@ -1,10 +1,19 @@
 local M = {}
 
+local function disable_diagnostic_msg()
+  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics,
+    { virtual_text = false }
+  )
+end
+
 local on_attach = function(_, bufnr)
   require('lsp-util').common_setup(bufnr)
 end
 
 M.setup = function ()
+  disable_diagnostic_msg()
+
   vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
   vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
   vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
