@@ -12,7 +12,7 @@ local on_attach = function(_, bufnr)
   nmap('<leader>o', require'jdtls'.organize_imports, '[O]rganize [I]ports')
 
   local vmap = require('lsp-util').lsp_map(bufnr, 'v')
-  vmap("<leader>dm", require('jdtls').extract_method, '[E]xtract [M]ethod')
+  vmap("<leader>dm", function () require('jdtls').extract_method(true) end, '[E]xtract [M]ethod')
 end
 
 M.setup_lsp = function()
