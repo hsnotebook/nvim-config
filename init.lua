@@ -163,8 +163,6 @@ vim.keymap.set('n', '<Leader>m', ':on<CR>', { noremap = true })
 vim.keymap.set('n', '<Leader>ev', ':sp $MYVIMRC<CR>:lcd %:h<CR>', { noremap = true })
 vim.keymap.set('n', '<Leader>sv', ':source $MYVIMRC<CR>', { noremap = true })
 
-vim.o.breakindent = true
-
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
