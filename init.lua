@@ -198,3 +198,5 @@ augroup END
 vim.cmd([[
   set statusline=%f%m%r%w\ %{fugitive#statusline()}\ [POS+%04l,%04v]\ [%p%%]\ [LEN=%L]\ [%{&ff}]
 ]])
+
+vim.keymap.set('n', 'gV', '`[v`]', { noremap = true })
