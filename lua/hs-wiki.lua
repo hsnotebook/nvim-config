@@ -34,9 +34,7 @@ M.openWiki = function()
   vim.cmd("lcd ~/wiki")
 end
 
-vim.cmd([[
-  command! Wiki lua require('hs-wiki').openWiki()
-]])
+vim.api.nvim_create_user_command("Wiki", M.openWiki, {})
 
 require('hs-wiki-heading').setup()
 
