@@ -48,7 +48,15 @@ require('packer').startup(function(use)
   use { 'lilydjwg/fcitx.vim', config = function () vim.opt.ttimeoutlen = 100 end }
   use 'gcmt/taboo.vim'
 
-  use 'junegunn/goyo.vim'
+  use {
+    'junegunn/goyo.vim',
+    config = function ()
+      vim.cmd([[
+        autocmd! User GoyoEnter lua vim.fn.system('tmux set status off')
+        autocmd! User GoyoLeave lua vim.fn.system('tmux set status on')
+      ]])
+    end
+  }
   use { 'vimwiki/vimwiki', config = function () require('hs-wiki').setup() end }
 
   -- git
