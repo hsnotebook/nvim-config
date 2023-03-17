@@ -156,15 +156,13 @@ M.cycle_heading = function ()
   vim.cmd('normal zz')
 end
 
-M.setup = function ()
-  vim.api.nvim_create_autocmd("BufEnter", {
-    group = vim.api.nvim_create_augroup("wiki-heading", {clear=true}),
-    pattern = {"*.md"},
-    callback = function ()
-      vim.keymap.set('n', '<S-Tab>', M.cycle_heading, {buffer=true})
-      vim.keymap.set('n', '<Tab>', "za" , {buffer=true})
-    end
-  })
-end
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("wiki-heading", {clear=true}),
+  pattern = "markdown",
+  callback = function ()
+    vim.keymap.set('n', '<S-Tab>', M.cycle_heading, {buffer=true})
+    vim.keymap.set('n', '<Tab>', "za" , {buffer=true})
+  end
+})
 
 return M
