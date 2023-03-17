@@ -7,6 +7,9 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.cmd [[packadd packer.nvim]]
 end
 
+vim.g.mapleader = ' '
+vim.g.localleader = ' '
+
 require('packer').startup(function(use)
   -- Package manager
   use 'wbthomason/packer.nvim'
@@ -152,9 +155,6 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   group = packer_group,
   pattern = vim.fn.expand '$MYVIMRC',
 })
-
-vim.g.mapleader = ' '
-vim.g.localleader = ' '
 
 vim.keymap.set('n', '<Leader>w', ':w<CR>', { noremap = true })
 vim.keymap.set('n', '<Leader>q', ':q<CR>', { noremap = true })
