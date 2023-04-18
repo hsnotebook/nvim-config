@@ -1,6 +1,6 @@
 local M = {}
 
-local wiki_home =  "/home/hs/wiki"
+local wiki_home =  "~/wiki"
 
 vim.cmd([[
   let ctfo = { 'name': 'ctfo', 'path': '~/wiki/ctfo', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
