@@ -57,7 +57,7 @@ require('packer').startup(function(use)
       ]])
     end
   }
-  use { 'vimwiki/vimwiki', config = function () require('hs-wiki').setup() end }
+  use { 'vimwiki/vimwiki', config = function () require('hs-wiki') end }
 
   -- git
   use {
