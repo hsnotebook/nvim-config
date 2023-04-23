@@ -9,6 +9,7 @@ vim.cmd([[
   let finance = { 'name': 'finance', 'path': '~/wiki/finance', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
   let g:vimwiki_list = [ctfo, IT, personal, finance]
   let g:vimwiki_html_header_numbering = 1
+  let g:vimwiki_markdown_link_ext = 1
 ]])
 
 M.wiki_files = function()
