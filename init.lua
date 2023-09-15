@@ -112,6 +112,10 @@ require('packer').startup(function(use)
 
   -- LSP Configuration & Plugins
   use {
+    'j-hui/fidget.nvim',
+    tag = 'legacy'
+  }
+  use {
     'neovim/nvim-lspconfig',
     requires = {
       -- Automatically install LSPs to stdpath for neovim
