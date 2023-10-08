@@ -16,35 +16,35 @@ local on_attach = function(_, bufnr)
 end
 
 M.setup_lsp = function()
-  local jdtls_home = '/home/hs/.config/jdtls'
-  local jdtls_server = jdtls_home .. '/server'
+  local data_dir = '/home/hs/.local/share/jdtls'
+  local jdtls_server = '/usr/share/java/jdtls'
 
   local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
-  local workspace_dir = jdtls_home .. '/workspace/' .. project_name
+  local workspace_dir = data_dir .. '/workspace/' .. project_name
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
   local config = {
     cmd = {
-      '/usr/lib/jvm/java-11-openjdk/bin/java',
+      '/usr/lib/jvm/java-17-openjdk/bin/java',
       '-Declipse.application=org.eclipse.jdt.ls.core.id1',
       '-Dosgi.bundles.defaultStartLevel=4',
       '-Declipse.product=org.eclipse.jdt.ls.core.product',
       '-Dlog.protocol=true',
       '-Dlog.level=ALL',
       '-Xms1g',
-      '-javaagent:' .. jdtls_home .. '/jar/lombok.jar',
+      '-javaagent:' .. data_dir .. '/jar/lombok.jar',
       '--add-modules=ALL-SYSTEM',
       '--add-opens', 'java.base/java.util=ALL-UNNAMED',
       '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
-      '-jar', jdtls_server .. '/plugins/org.eclipse.equinox.launcher_1.6.300.v20210813-1054.jar',
+      '-jar', jdtls_server .. '/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar',
       '-configuration', jdtls_server .. '/config_linux',
       '-data', workspace_dir
     },
     capabilities = capabilities,
     init_options = {
-      bundles = { jdtls_home .. "/jar/com.microsoft.java.debug.plugin-0.32.0.jar" };
+      bundles = { data_dir .. "/jar/com.microsoft.java.debug.plugin-0.49.0.jar" };
     },
     on_attach = on_attach
   }
