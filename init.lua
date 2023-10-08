@@ -92,6 +92,13 @@ require('packer').startup(function(use)
     end
   }
   use { 'vimwiki/vimwiki', config = function () require('hs-wiki') end }
+  use { 'voldikss/vim-translator',
+    config = function ()
+      vim.cmd([[
+          let g:translator_default_engines=['google']
+      ]])
+    end
+  }
 
   -- git
   use {
