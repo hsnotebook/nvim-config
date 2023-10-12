@@ -243,7 +243,7 @@ vim.o.shiftwidth = 4
 vim.cmd([[
 augroup two_tab_indent
   au!
-  autocmd FileType lua,html,scss,vue,javascript,yaml,css,json setlocal tabstop=2 | setlocal shiftwidth=2
+  autocmd FileType xml,lua,html,scss,vue,javascript,yaml,css,json setlocal tabstop=2 | setlocal shiftwidth=2
 augroup END
 ]])
 
