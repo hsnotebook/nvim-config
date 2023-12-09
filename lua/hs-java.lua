@@ -38,7 +38,7 @@ M.setup_lsp = function()
       '--add-modules=ALL-SYSTEM',
       '--add-opens', 'java.base/java.util=ALL-UNNAMED',
       '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
-      '-jar', jdtls_server .. '/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar',
+      '-jar', jdtls_server .. '/plugins/org.eclipse.equinox.launcher_1.6.700.v20231214-2017.jar',
       '-configuration', jdtls_server .. '/config_linux',
       '-data', workspace_dir
     },
