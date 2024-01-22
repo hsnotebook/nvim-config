@@ -3,8 +3,12 @@ local M = {}
 local wiki_home =  "~/wiki"
 
 vim.cmd([[
-  let wiki = { 'name': 'finance', 'path': '~/wiki', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
-  let g:vimwiki_list = [wiki]
+  let ctfo = { 'name': 'ctfo', 'path': '~/wiki/jobs/ctfo', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
+  let IT = { 'name': 'IT', 'path': '~/wiki/IT', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
+  let finance = { 'name': 'finance', 'path': '~/wiki/finance', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
+  let personal = { 'name': 'personal', 'path': '~/wiki/personal', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
+  let job = { 'name': 'job', 'path': '~/wiki/jobs/archive', 'auto_toc': 1, 'syntax': 'markdown', 'ext': 'md' }
+  let g:vimwiki_list = [ctfo, IT, finance, personal, job]
   let g:vimwiki_html_header_numbering = 1
   let g:vimwiki_markdown_link_ext = 1
 ]])
