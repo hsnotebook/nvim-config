@@ -6,4 +6,5 @@ return {
       colorscheme = "gruvbox",
     },
   },
+  { "akinsho/bufferline.nvim", enabled = false },
 }
