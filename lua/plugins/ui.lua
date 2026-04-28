@@ -7,6 +7,7 @@ return {
     },
   },
   { "akinsho/bufferline.nvim", enabled = false },
+  { "gcmt/taboo.vim" },
   {
     "folke/snacks.nvim",
     opts = {
