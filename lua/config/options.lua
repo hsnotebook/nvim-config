@@ -3,3 +3,4 @@
 -- Add any additional options here
 vim.opt.number = false
 vim.opt.relativenumber = false
+vim.opt.spell = false
