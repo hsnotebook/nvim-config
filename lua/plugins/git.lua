@@ -4,7 +4,13 @@ return {
     lazy = true,
     cmd = "Git",
     keys = {
-      { "<leader>gs", "<cmd>Git<cr>", desc = "Git Status" },
+      { "<leader>gs", "<cmd>topleft Git<cr>", desc = "Git Status" },
+    },
+  },
+  {
+    "folke/snacks.nvim",
+    keys = {
+      { "<leader>gs", false },
     },
   },
 }
