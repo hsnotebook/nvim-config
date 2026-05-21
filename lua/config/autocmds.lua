@@ -4,5 +4,31 @@
 -- Add any additional autocmds here
 -- with `vim.api.nvim_create_autocmd`
 --
--- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
--- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
+local function augroup(name)
+  return vim.api.nvim_create_augroup("hs_" .. name, { clear = true })
+end
+
+-- SSH 环境下发送输入法切换信号
+local function send_input_method_signal(event)
+  local ssh_client_ip = os.getenv("SSH_CONNECTION"):gmatch("%S+")()
+  local cmd = string.format("echo '%s' | nc %s 12345", event, ssh_client_ip)
+  vim.fn.jobstart({ "sh", "-c", cmd }, { detach = true })
+end
+
+local is_ssh = os.getenv("SSH_CONNECTION") ~= nil
+
+if is_ssh then
+  vim.api.nvim_create_autocmd("InsertLeave", {
+    pattern = "*",
+    callback = function()
+      send_input_method_signal("INSERT_LEAVE")
+    end,
+  })
+
+  vim.api.nvim_create_autocmd("InsertEnter", {
+    pattern = "*",
+    callback = function()
+      send_input_method_signal("INSERT_ENTER")
+    end,
+  })
+end
