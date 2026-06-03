@@ -16,3 +16,6 @@ vim.keymap.set("v", "Y", function()
 end, { desc = "Copy file path with line numbers" })
 
 vim.keymap.del("n", "<leader>n")
+vim.keymap.del({ "i", "n", "v" }, "<A-k>")
+vim.keymap.del({ "i", "n", "v" }, "<A-j>")
+vim.keymap.del({ "i", "n", "v" }, "<C-s>")
