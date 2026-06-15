@@ -8,6 +8,14 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("hs_" .. name, { clear = true })
 end
 
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  group = augroup("txt"),
+  pattern = { "*.txt" },
+  callback = function()
+    vim.bo.filetype = "markdown"
+  end,
+})
+
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("java"),
   pattern = { "java" },
